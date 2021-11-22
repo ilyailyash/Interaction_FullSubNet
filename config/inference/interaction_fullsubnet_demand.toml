@@ -1,0 +1,10 @@
+inherit = "./config/common/interaction_fullsubnet_inference.toml"
+
+[dataset]
+path = "dataset.Demand.DemandDatasetInference"
+[dataset.args]
+noisy_dataset = '/media/administrator/Data/demand'
+#noisy_dataset = ["/home/administrator/Data/test_noise"]
+limit = false
+offset = 0
+sr = 16000

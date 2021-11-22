@@ -1,0 +1,35 @@
+inherit = "config/common/merge_fullsubnet_train.toml"
+
+[meta]
+save_dir = "experiments"
+use_amp = true
+
+[model]
+path = "model.merge_fullsubnet_model.Model"
+[model.args]
+num_sub_layers = 2
+sband_model_hidden_size = 384
+use_offline_norm = true
+num_sub_batches = 2
+
+[train_dataset]
+[train_dataset.args]
+clean_dataset = "/home/administrator/Data/DNS-Challenge/datasets/test_set/synthetic/no_reverb/audio"
+[train_dataset.dataloader]
+batch_size = 8
+num_workers = 6
+shuffle = true
+
+[validation_dataset]
+path = "dataset.interaction_validation_dataset.Dataset"
+
+[trainer]
+path = "trainer.merge_fullsubnet_trainer.Trainer"
+[trainer.train]
+save_checkpoint_interval = 1
+[trainer.validation]
+validation_interval = 1
+[trainer.visualization]
+n_samples = 20
+num_workers = 6
+metrics = ["WB_PESQ", "NB_PESQ", "STOI", "SI_SDR"]
